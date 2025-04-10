@@ -1,14 +1,26 @@
-# Use Java 21 as base image
-FROM openjdk:21-jdk-slim
-
-# Set working directory
+# 🔧 Stage 1: Build the application
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copy the JAR file into the container
-COPY target/vendor-management-0.0.1-SNAPSHOT.jar app.jar
+# Copy pom.xml and download dependencies first (to leverage Docker layer caching)
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-# Expose port 8080
+# Now copy the source code
+COPY src ./src
+
+# Build the project (skip tests for faster build)
+RUN mvn clean package -DskipTests
+
+# 🚀 Stage 2: Run the application
+FROM openjdk:21-jdk-slim
+WORKDIR /app
+
+# Copy the JAR from build stage
+COPY --from=build /app/target/vendor-management-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose port (Render looks for port 8080 by default)
 EXPOSE 8080
 
-# Run the application
-CMD ["java", "-jar", "app.jar"] 
+# Start the application
+CMD ["java", "-jar", "app.jar"]

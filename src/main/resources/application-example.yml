@@ -4,10 +4,11 @@ spring:
       uri: ${SPRING_DATA_MONGODB_URI}
 
   mail:
-    username: ${spring.mail.username}
-    password: ${spring.mail.password}
-    host: smtp.gmail.com
-    port: 587
+    username: ${SPRING_MAIL_USERNAME}
+    password: ${SPRING_MAIL_PASSWORD}
+    host: ${SPRING_MAIL_HOST}
+    port: ${SPRING_MAIL_PORT}
+
 
 jwt:
   secret: ${JWT_SECRET}

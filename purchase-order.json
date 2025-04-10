@@ -1,0 +1,11 @@
+{
+    "vendorId": "your_vendor_id_here",
+    "items": [
+        "Laptop",
+        "Mouse",
+        "Keyboard"
+    ],
+    "totalAmount": 2500.00,
+    "status": "PENDING",
+    "orderDate": "2024-04-04T10:00:00.000Z"
+} 

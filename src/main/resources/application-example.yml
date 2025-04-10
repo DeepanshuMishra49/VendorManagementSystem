@@ -1,28 +1,19 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
+      uri: ${SPRING_DATA_MONGODB_URI}
+
   mail:
+    username: ${spring.mail.username}
+    password: ${spring.mail.password}
     host: smtp.gmail.com
     port: 587
-    username: your-email@gmail.com
-    password: your-app-password
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
 
 jwt:
-  secret: your-jwt-secret-key
-  expiration: 86400000 # 24 hours in milliseconds
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION}
 
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: your-google-client-id
-            client-secret: your-google-client-secret 
+twilio:
+  account-sid: ${TWILIO_ACCOUNT_SID}
+  auth-token: ${TWILIO_AUTH_TOKEN}
+  phone-number: ${TWILIO_PHONE_NUMBER}

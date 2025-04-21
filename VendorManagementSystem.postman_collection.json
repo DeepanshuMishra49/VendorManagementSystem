@@ -1,0 +1,592 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+		"name": "Vendor Management System",
+		"description": "API collection for Vendor Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Request OTP",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/request-otp",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "request-otp"]
+						}
+					}
+				},
+				{
+					"name": "Verify OTP and Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@example.com\",\n    \"otp\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/verify-otp",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "verify-otp"]
+						}
+					}
+				},
+				{
+					"name": "Get User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth/profile",
+							"host": ["{{base_url}}"],
+							"path": ["api", "auth", "profile"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Vendors",
+			"item": [
+				{
+					"name": "Get All Vendors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vendors",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendors"]
+						}
+					}
+				},
+				{
+					"name": "Create Vendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vendor Name\",\n    \"email\": \"vendor@example.com\",\n    \"phone\": \"1234567890\",\n    \"address\": \"Vendor Address\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vendors",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendors"]
+						}
+					}
+				},
+				{
+					"name": "Get Vendor by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vendors/{{vendorId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendors", "{{vendorId}}"]
+						}
+					}
+				},
+				{
+					"name": "Update Vendor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Updated Vendor Name\",\n    \"email\": \"updated@example.com\",\n    \"phone\": \"9876543210\",\n    \"address\": \"Updated Address\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vendors/{{vendorId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendors", "{{vendorId}}"]
+						}
+					}
+				},
+				{
+					"name": "Delete Vendor",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vendors/{{vendorId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendors", "{{vendorId}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Purchase Orders",
+			"item": [
+				{
+					"name": "Get All Purchase Orders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/purchaseOrder",
+							"host": ["{{base_url}}"],
+							"path": ["api", "purchaseOrder"]
+						}
+					}
+				},
+				{
+					"name": "Create Purchase Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendorId\": \"vendor123\",\n    \"orderDate\": \"2024-03-20\",\n    \"items\": [\n        {\n            \"name\": \"Item 1\",\n            \"quantity\": 10,\n            \"price\": 100.00\n        }\n    ],\n    \"totalAmount\": 1000.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/purchaseOrder",
+							"host": ["{{base_url}}"],
+							"path": ["api", "purchaseOrder"]
+						}
+					}
+				},
+				{
+					"name": "Get Purchase Order by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/purchaseOrder/{{orderId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "purchaseOrder", "{{orderId}}"]
+						}
+					}
+				},
+				{
+					"name": "Update Purchase Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendorId\": \"vendor123\",\n    \"orderDate\": \"2024-03-20\",\n    \"items\": [\n        {\n            \"name\": \"Updated Item 1\",\n            \"quantity\": 15,\n            \"price\": 120.00\n        }\n    ],\n    \"totalAmount\": 1800.00\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/purchaseOrder/{{orderId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "purchaseOrder", "{{orderId}}"]
+						}
+					}
+				},
+				{
+					"name": "Delete Purchase Order",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/purchaseOrder/{{orderId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "purchaseOrder", "{{orderId}}"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Send Order Confirmation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/notifications/vendor/{{vendorId}}/order-confirmation?orderId={{orderId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notifications", "vendor", "{{vendorId}}", "order-confirmation"],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Status Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/notifications/vendor/{{vendorId}}/status-update?orderId={{orderId}}&status={{status}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notifications", "vendor", "{{vendorId}}", "status-update"],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "{{orderId}}"
+								},
+								{
+									"key": "status",
+									"value": "{{status}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Performance Alert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/notifications/vendor/{{vendorId}}/performance-alert?metric={{metric}}&value={{value}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notifications", "vendor", "{{vendorId}}", "performance-alert"],
+							"query": [
+								{
+									"key": "metric",
+									"value": "{{metric}}"
+								},
+								{
+									"key": "value",
+									"value": "{{value}}"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Send Payment Confirmation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/notifications/vendor/{{vendorId}}/payment-confirmation?orderId={{orderId}}&amount={{amount}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "notifications", "vendor", "{{vendorId}}", "payment-confirmation"],
+							"query": [
+								{
+									"key": "orderId",
+									"value": "{{orderId}}"
+								},
+								{
+									"key": "amount",
+									"value": "{{amount}}"
+								}
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Vendor Performance",
+			"item": [
+				{
+					"name": "Create Performance Record",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendorId\": \"vendor123\",\n    \"rating\": 4.5,\n    \"onTimeDelivery\": 95.0,\n    \"qualityScore\": 4.8,\n    \"communicationScore\": 4.2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vendor-performances",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendor-performances"]
+						}
+					}
+				},
+				{
+					"name": "Get All Performance Records",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vendor-performances",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendor-performances"]
+						}
+					}
+				},
+				{
+					"name": "Get Performance by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vendor-performances/{{performanceId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendor-performances", "{{performanceId}}"]
+						}
+					}
+				},
+				{
+					"name": "Get Performance by Vendor ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vendor-performances/vendor/{{vendorId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendor-performances", "vendor", "{{vendorId}}"]
+						}
+					}
+				},
+				{
+					"name": "Update Performance Record",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendorId\": \"vendor123\",\n    \"rating\": 4.7,\n    \"onTimeDelivery\": 97.0,\n    \"qualityScore\": 4.9,\n    \"communicationScore\": 4.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/vendor-performances/{{performanceId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendor-performances", "{{performanceId}}"]
+						}
+					}
+				},
+				{
+					"name": "Delete Performance Record",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/vendor-performances/{{performanceId}}",
+							"host": ["{{base_url}}"],
+							"path": ["api", "vendor-performances", "{{performanceId}}"]
+						}
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "your_jwt_token_here",
+			"type": "string"
+		},
+		{
+			"key": "vendorId",
+			"value": "vendor123",
+			"type": "string"
+		},
+		{
+			"key": "orderId",
+			"value": "order123",
+			"type": "string"
+		},
+		{
+			"key": "performanceId",
+			"value": "performance123",
+			"type": "string"
+		},
+		{
+			"key": "status",
+			"value": "completed",
+			"type": "string"
+		},
+		{
+			"key": "metric",
+			"value": "delivery_time",
+			"type": "string"
+		},
+		{
+			"key": "value",
+			"value": "95.5",
+			"type": "string"
+		},
+		{
+			"key": "amount",
+			"value": "1000.00",
+			"type": "string"
+		}
+	]
+}
